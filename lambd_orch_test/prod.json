@@ -1,0 +1,6 @@
+{
+    "LambdaFunction": {
+        "S3_BUCKET": "swapi-prod-buck",
+        "DYNAMODB_TABLE": "swapi-prod-table"
+    }
+}

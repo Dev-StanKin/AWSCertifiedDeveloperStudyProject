@@ -1,0 +1,23 @@
+services:
+  producer:
+    environment:
+      - SQS_QUEUE_URL=https://sqs.us-east-1.amazonaws.com/220134997021/microqueue
+    image: 220134997021.dkr.ecr.us-east-1.amazonaws.com/producer
+    x-aws-role:
+      Version: '2012-10-17'
+      Statement:
+        - Effect: Allow
+          Action: sqs:*
+          Resource: arn:aws:sqs:us-east-1:220134997021:microqueue
+  consumer:
+    environment:
+      - SQS_QUEUE_URL=https://sqs.us-east-1.amazonaws.com/220134997021/microqueue
+    image: 220134997021.dkr.ecr.us-east-1.amazonaws.com/consumer
+    depends_on:
+      - producer
+    x-aws-role:
+      Version: '2012-10-17'
+      Statement:
+        - Effect: Allow
+          Action: sqs:*
+          Resource: arn:aws:sqs:us-east-1:220134997021:microqueue
